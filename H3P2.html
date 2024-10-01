@@ -1,0 +1,117 @@
+<!Doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="JavaScript homework 3 Part 2">
+<title>Homework 3 Part 2</title>
+<style>
+    body {
+       margin: 20px;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       flex-direction: column;
+       background-color: #D3D9D4; 
+     }
+ 	a.one:link {
+ 	color: black;
+ 	background: white; 
+ 	text-decoration: none; 
+ 	position: absolute;
+ 	top: 20px; 
+ 	left: 20px;
+     }
+
+     table {
+       margin-top: 20px;
+       width: 80%; 
+       max-width: 600px; 
+       border-collapse: collapse;
+     }
+     input[type="text"], input[type="number"] {
+       width: 100%;
+        padding: 8px;
+       box-sizing: border-box;
+     }
+     .right-align {
+        text-align: right;
+     }
+     h2, h3 {
+        text-align: center;
+     }
+</style>
+</head>
+<body>
+<nav>
+<a class="one" href="H3.html"> &lt;-- Back</a>
+</nav> 
+
+<h2>Homework 3 P2</h2>
+<form id="salesForm">
+<label for="salesperson">Salesperson Name:</label>
+<input type="text" id="salesperson" required>
+
+<table>
+  <tr>
+  <th>Item</th>
+  <th>Price</th>
+  <th>Quantity Sold</th>
+  <th>Total</th>
+  </tr>
+  <tr>
+  <td>Item 1</td>
+  <td>$20.99</td>
+  <td><input type="number" id="item1Q" min="0"></td>
+  <td><input type="text" id="item1Total" readonly></td>
+  </tr>
+  <tr>
+  <td>Item 2</td>
+  <td>$12.75</td>
+  <td><input type="number" id="item2Q" min="0"></td>
+  <td><input type="text" id="item2Total" readonly></td>
+  </tr>
+  <tr>
+  <td>Item 3</td>
+  <td>$9.95</td>
+  <td><input type="number" id="item3Q" min="0"></td>
+  <td><input type="text" id="item3Total" readonly></td>
+  </tr>
+  <tr>
+  <td>Item 4</td>
+  <td>$35.89</td>
+  <td><input type="number" id="item4Q" min="0"></td>
+  <td><input type="text" id="item4Total" readonly></td>
+  </tr>
+  </table>
+
+  <h3>Total Earnings</h3>
+  <div>
+  Total Sales: <input type="text" id="totalSales" readonly class="right-align">
+  </div>
+  <div>
+  Total Earnings: <input type="text" id="totalEarnings" readonly class="right-align">
+  </div>
+  <button type="button" onclick="calculateTotals()">Calculate</button>
+</form>
+
+<script>
+const prices = [20.99, 12.75, 9.95, 35.89];
+
+function calculateTotals() {
+ let totalSales = 0;
+
+ for (let i = 0; i < prices.length; i++) {
+ const Q = parseFloat(document.getElementById(`item${i + 1}Q`).value) || 0;
+ const total = Q * prices[i];
+ document.getElementById(`item${i + 1}Total`).value = total.toFixed(2);
+ totalSales += total;
+ }
+
+ const earnings = 250 + (totalSales * 0.09);
+ document.getElementById('totalSales').value = totalSales.toFixed(2);
+ document.getElementById('totalEarnings').value = earnings.toFixed(2);
+}
+</script>
+
+</body>
+</html>
