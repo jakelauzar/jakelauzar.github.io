@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="JavaScript Homework">
+    <title>Homework 4 part 2</title>
+    <style>
+        body {
+        background-color: #D3D9D4;
+        margin: 20px;
+        text-align: center;
+        }
+        a.one:link {
+        color: black;
+            background: white; 
+            text-decoration: none; 
+            position: absolute;
+            top: 20px; 
+            left: 20px;
+        }
+        a.one:hover {
+            color: blue;
+            font-size: 150%;
+        }
+       table {
+             width: 30%;
+            margin: 20px auto; 
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+	    background-color: white;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: white;
+        }
+
+    </style>
+<script>
+        function calculateCompoundInterest(principal, rate) {
+        let results = [];
+        for (let year = 1; year <= 5; year++) {
+        const amount = principal * Math.pow((1 + rate), year);
+        results.push({ year: year, amount: amount.toFixed(2), rate: rate.toFixed(2) });
+        }
+        return results;
+        }
+        function displayTables() {
+        const principal = 1000;
+        const rates = [0.05, 0.06, 0.07];
+        const tableContainer = document.getElementById('tables');
+        rates.forEach(rate => {
+        const results = calculateCompoundInterest(principal, rate);
+        const table = document.createElement('table');
+        const header = table.createTHead();
+        const headerRow = header.insertRow();
+        headerRow.innerHTML = '<th>Year</th><th>Amount on Deposit</th><th>Interest Rate</th>';
+        const tbody = table.createTBody();
+        results.forEach(result => {
+        const row = tbody.insertRow();
+        row.innerHTML = `<td>${result.year}</td><td>${result.amount}</td><td>${result.rate}</td>`;
+	});
+        tableContainer.appendChild(table);
+        });
+        }
+    </script>
+</head>
+<body onload="displayTables()">
+<a class="one" href="H4.html"> &lt;-- Back</a>
+
+    <h1>Part 2 : Compound Tables</h1>
+    <div id="tables"></div>
+</body>
+</html>

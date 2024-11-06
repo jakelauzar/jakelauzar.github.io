@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="JavaScript Homework 3 P1">
+    <title>Homework 3 part 1</title>
+    <style>
+    body {
+    background-color: #D3D9D4;
+    margin: 20px;
+    text-align: center;
+     }
+ a.one:link {
+ color: black;
+ background: white; 
+ text-decoration: none; 
+ position: absolute;
+ top: 20px; 
+ left: 20px;
+ }
+ .container {
+ max-width: 400px;
+ margin: auto;
+ }
+ input {
+ margin-bottom: 10px;
+ padding: 5px;
+ }
+ button {
+ padding: 10px 20px;
+ font-size: 16px;
+ }
+ .result {
+ margin-top: 20px;
+ font-size: 18px;
+ }
+.error {
+ color: red;
+ }
+
+</style>
+</head>
+<body>
+<nav>
+<a class="one" href="H3.html"> &lt;-- Back</a>
+</nav> 
+<h1 style="color: black;">Student Grades</h1>
+    
+<div class="container">
+<fieldset>
+<input type="number" id="HomeAvg" placeholder="Enter Homework Average" min="0" max="100" style="width: 100%; padding: 8px; box-sizing: border-box;">
+<input type="number" id="MTS" placeholder="Enter Mid-Term Exam Score" min="0" max="100" style="width: 100%; padding: 8px; box-sizing: border-box;">
+<input type="number" id="FTS" placeholder="Enter Final Exam Score" min="0" max="100" style="width: 100%; padding: 8px; box-sizing: border-box;">
+<input type="number" id="Part" placeholder="Enter Participation Score" min="0" max="100" style="width: 100%; padding: 8px; box-sizing: border-box;">
+<button onclick="calculate()">Enter</button>
+<button onclick="resetInputs()">Clear</button>
+<div class="error" id="errorResult"></div>
+<div id="output" style="margin-top: 20px; font-weight: bold;"></div> 
+<div id="retakeMessage" style="margin-top: 10px; color: red;"></div> 
+
+</fieldset>
+</div>
+<script>
+function calculate() {
+    const hwAvg = parseFloat(document.getElementById('HomeAvg').value);
+    const midExam = parseFloat(document.getElementById('MTS').value);
+    const finalExam = parseFloat(document.getElementById('FTS').value);
+    const participation = parseFloat(document.getElementById('Part').value);
+
+    document.getElementById('errorResult').innerText = '';
+    document.getElementById('output').innerText = '';
+    document.getElementById('retakeMessage').innerText = '';
+if (!isValidInput(hwAvg) || !isValidInput(midExam) || !isValidInput(finalExam) || !isValidInput(participation)) {
+document.getElementById('errorResult').innerText = 'Please enter valid scores (0-100).';
+return;
+}
+const finalAverage = (.5 * hwAvg) + (.2 * midExam) + (.2 * finalExam) + (.1 * participation);
+const roundedAverage = Math.round(finalAverage);
+const letterGrade = getLetterGrade(roundedAverage);
+document.getElementById('output').innerText = `Final Average: ${roundedAverage}, Letter Grade: ${letterGrade}`;
+if (letterGrade === 'D' || letterGrade === 'F') {
+document.getElementById('retakeMessage').innerText = "Student must retake the course.";
+}
+}
+
+function isValidInput(value) {
+return !isNaN(value) && value >= 0 && value <= 100;
+}
+
+function getLetterGrade(average) {
+if (average >= 90) return 'A';
+if (average >= 80) return 'B';
+if (average >= 70) return 'C';
+if (average >= 60) return 'D';
+return 'F';
+}
+
+function resetInputs() {
+    document.getElementById('HomeAvg').value = '';
+    document.getElementById('MTS').value = '';
+    document.getElementById('FTS').value = '';
+    document.getElementById('Part').value = '';
+    document.getElementById('errorResult').innerText = '';
+    document.getElementById('output').innerText = '';
+}
+</script>
+</body>
+</html>

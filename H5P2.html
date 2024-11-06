@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="JavaScript Homework">
+    <title>Homework 5 part 2</title>
+    <style>
+        body {
+        background-color: #D3D9D4;
+        margin: 20px;
+        text-align: center;
+        }
+        a.one:link {
+        color: black;
+            background: white; 
+            text-decoration: none; 
+            position: absolute;
+            top: 20px; 
+            left: 20px;
+        }
+        a.one:hover {
+            color: blue;
+            font-size: 150%;
+        }
+       table {
+             width: 30%;
+            margin: 20px auto; 
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+	    background-color: white;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: white;
+        }
+	.container {
+            width: 50%;
+            margin: 0 auto;
+        }
+        select, button {
+            margin-bottom: 15px;
+            padding: 8px;
+        }
+
+
+    </style>
+<body>
+<nav>
+<a class="one" href="H5.html"> &lt;-- Back</a>
+</nav> 
+<title>Navigate Using Pulldown Menus</title>
+</head>
+
+    <div class="container">
+        <h1>Select a Website</h1>
+
+        
+        <div>
+            <label for="menu1">Select a Website (onchange):</label>
+            <select id="menu1" onchange="openSite1()">
+                <option value="">--Select--</option>
+                <option value="https://www.wikipedia.org">Wikipedia</option>
+                <option value="https://www.github.com">GitHub</option>
+                <option value="https://www.collegeofsanmateo.edu">CSM Main Page</option>
+            </select>
+        </div>
+        <div>
+            <label for="menu2">Select a Website (onclick button):</label>
+            <select id="menu2">
+                <option value="">--Select--</option>
+                <option value="https://www.espn.com">ESPN</option>
+                <option value="https://www.youtube.com">YouTube</option>
+                <option value="https://www.google.com">Google</option>
+            </select>
+            <button onclick="openSite2()">Go</button>
+        </div>
+    </div>
+
+    <script>
+        // Function for the first pulldown menu (onchange event)
+        function openSite1() {
+            var selectedOption = document.getElementById('menu1').value;
+            if (selectedOption) {
+                window.open(selectedOption, '_blank');  // Open in a new tab
+            }
+        }
+
+        // Function for the second pulldown menu (onclick event)
+        function openSite2() {
+            var selectedOption = document.getElementById('menu2').value;
+            if (selectedOption) {
+                window.open(selectedOption, '_blank');  // Open in a new tab
+            }
+        }
+    </script>
+
+</body>
+</html>
+

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="JavaScript Homework">
+    <title>Homework 5 part 1</title>
+    <style>
+        body {
+        background-color: #D3D9D4;
+        margin: 20px;
+        text-align: center;
+        }
+        a.one:link {
+        color: black;
+            background: white; 
+            text-decoration: none; 
+            position: absolute;
+            top: 20px; 
+            left: 20px;
+        }
+        a.one:hover {
+            color: blue;
+            font-size: 150%;
+        }
+       table {
+             width: 30%;
+            margin: 20px auto; 
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+	    background-color: white;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: white;
+        }
+
+    </style>
+<body>
+<nav>
+<a class="one" href="H5.html"> &lt;-- Back</a>
+</nav> 
+<div class="container">
+<h1>Form Submission</h1>
+<form id="userForm" onsubmit="return validateForm()">
+<div class="form-group">
+<label for="fullName">Full Name:</label>
+<input type="text" id="fullName" name="fullName" required>
+</div>
+<div class="form-group">
+<label>Age Group:</label><br>
+<input type="radio" id="under21" name="ageGroup" value="Under 21">
+<label for="under21">Under 21</label><br>
+<input type="radio" id="between21and50" name="ageGroup" value="21-50">
+<label for="between21and50">Between 21 and 50</label><br>
+<input type="radio" id="over50" name="ageGroup" value="Over 50">
+<label for="over50">Over 50</label>
+</div>
+<div class="form-group">
+<label>Browsers You've Used:</label><br>
+<input type="checkbox" id="firefox" name="browsers" value="Firefox">
+<label for="firefox">Firefox</label><br>
+<input type="checkbox" id="edge" name="browsers" value="Edge">
+<label for="edge">Edge</label><br>
+<input type="checkbox" id="chrome" name="browsers" value="Chrome">
+<label for="chrome">Chrome</label><br>
+<input type="checkbox" id="safari" name="browsers" value="Safari">
+<label for="safari">Safari</label>
+</div>
+<div class="form-group">
+<button type="submit">Submit</button>
+<button type="button" onclick="clearForm()">Clear</button>
+</div>
+</form>
+<div id="output" class="output"></div>
+</div>
+<script>
+function clearForm() {
+document.getElementById('userForm').reset();
+document.getElementById('output').style.display = 'none';
+}
+function validateForm() {
+let output = document.getElementById('output');
+output.style.display = 'none';
+output.innerHTML = '';
+let fullName = document.getElementById('fullName').value;
+if (!fullName) {
+output.style.display = 'block';
+output.innerHTML = '<p class="error">Full name is required.</p>';
+return false;
+}
+let ageGroup = document.querySelector('input[name="ageGroup"]:checked');
+if (!ageGroup) {
+output.style.display = 'block';
+output.innerHTML = '<p class="error">Please select an age group.</p>';
+return false;
+}
+let browsers = document.querySelectorAll('input[name="browsers"]:checked');
+if (browsers.length === 0) {
+output.style.display = 'block';
+output.innerHTML = '<p class="error">Please select at least one browser.</p>';
+return false;
+}
+output.style.display = 'block';
+output.innerHTML = '<p>Thanks, your data was submitted!</p>';
+return false; // Prevent actual form submission for demonstration purposes
+}
+</script>
+
+</body>
+</html>
+

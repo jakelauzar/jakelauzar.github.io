@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="JavaScript Homework">
+    <title>Homework 5 part 3</title>
+    <style>
+        body {
+        background-color: #D3D9D4;
+        margin: 20px;
+        text-align: center;
+        }
+        a.one:link {
+        color: black;
+            background: white; 
+            text-decoration: none; 
+            position: absolute;
+            top: 20px; 
+            left: 20px;
+        }
+        a.one:hover {
+            color: blue;
+            font-size: 150%;
+        }
+       table {
+             width: 30%;
+            margin: 20px auto; 
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+	    background-color: white;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: white;
+        }
+
+    </style>
+<body>
+<nav>
+<a class="one" href="H5.html"> &lt;-- Back</a>
+</nav> 
+<body>
+<div class="container">
+<h1>State Information Lookup</h1>
+<form id="stateForm" onsubmit="return getStateInfo()">
+<div class="form-group">
+<label for="stateInput">Enter State Name or Abbreviation:</label>
+<input type="text" id="stateInput" name="stateInput" required>
+</div>
+<div class="form-group">
+<button type="submit">Get State Info</button>
+<button type="button" onclick="clearForm()">Clear</button>
+</div>
+</form>
+<div id="output"></div>
+</div>
+<script>
+const statesData = {
+"alabama": {
+name: "alabama",
+abbreviation: "AL",
+population: "4,903,185",
+capital: "Montgomery",
+},
+"alaska": {
+name: "Alaska",
+abbreviation: "AK",
+population: "731,545",
+capital: "Juneau",
+},
+"arizona": {
+name: "Arizona",
+abbreviation: "AZ",
+population: "7,278,717",
+capital: "Phoenix"
+},
+"arkansas": {
+name: "Arkansas",
+abbreviation: "AR",
+population: "3,017,825",
+capital: "Little Rock",
+},
+"california": {
+name: "California",
+abbreviation: "CA",
+population: "39,512,223",
+capital: "Sacramento",
+},
+"colorado": {
+name: "Colorado",
+abbreviation: "CO",
+population: "5,758,736",
+capital: "Denver",
+}
+};
+function clearForm() {
+document.getElementById('stateInput').value = '';
+document.getElementById('output').style.display = 'none';
+}
+function getStateInfo() {
+const userInput = document.getElementById('stateInput').value.trim().toLowerCase();
+const outputDiv = document.getElementById('output');
+outputDiv.style.display = 'none';
+let stateFound = false;
+for (const stateKey in statesData) {
+const state = statesData[stateKey];
+if (stateKey === userInput || state.abbreviation.toLowerCase() === userInput) {
+stateFound = true;
+outputDiv.style.display = 'block';
+outputDiv.innerHTML = `
+<div class="state-info">
+<h3>Information for ${state.name} (${state.abbreviation}):</h3>
+<ul>
+<li><strong>Population:</strong> ${state.population}</li>
+<li><strong>Capital:</strong> ${state.capital}</li>
+</ul>
+</div>
+`;
+break;
+}
+}
+if (!stateFound) {
+outputDiv.style.display = 'block';
+outputDiv.innerHTML = `
+<p class="error">Sorry, we do not have information about this state! We only have information about:</p>
+<ul>
+<li>Alabama (AL)</li>
+<li>Alaska (AK)</li>
+<li>Arizona (AZ)</li>
+<li>Arkansas (NY)</li>
+<li>California (CA)</li>
+<li>Colorado (CO)</li>
+</ul>
+`;
+}
+return false;
+  }
+</script>
+
+</body>
+</html>
