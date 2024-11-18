@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="JavaScript Homework">
+    <title>Homework 6 part 2</title>
+<style>
+        body {
+        background-color: #D3D9D4;
+        margin: 20px;
+        text-align: center;
+        }
+        a.one:link {
+        color: black;
+            background: white; 
+            text-decoration: none; 
+            position: absolute;
+            top: 20px; 
+            left: 20px;
+        }
+        a.one:hover {
+            color: blue;
+            font-size: 150%;
+        }
+	form {
+            margin-bottom: 20px;
+        }
+        textarea, input[type="text"] {
+            width: 300px;
+            padding: 8px;
+            margin: 5px 0;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 15px;
+            font-weight: bold;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+        }
+        .output-message {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        h1, h2 {
+            color: #4CAF50;
+
+    </style>
+</head>
+<body>
+<nav>
+<a class="one" href="H6.html"> &lt;-- Back</a>
+</nav> 
+
+<h1>Homework 6 Part 2</h1>
+<h2> Letter finder </h2>
+<form id="searchForm">
+<label for="content">Enter your content:</label><br>
+<textarea id="content" rows="6" placeholder="Type your content here..."></textarea><br><br>
+<label for="char">Enter a single character to search:</label><br>
+<input type="text" id="char" maxlength="1" placeholder="One letter only"><br><br>
+<button type="submit">Search</button>
+</form>
+
+<div id="result" class="result"></div>
+<div id="errorMessage" class="error-message"></div>
+<script>        
+document.getElementById("searchForm").addEventListener("submit", function(event) {
+event.preventDefault();event.preventDefault();            
+const content = document.getElementById("content").value;
+const searchChar = document.getElementById("char").value; 
+const resultContainer = document.getElementById("result");
+resultContainer.innerHTML = "";            
+if (searchChar === "") {
+resultContainer.innerHTML = "Please enter a character to search.";
+return;
+}
+if (searchChar === "" || searchChar.charCodeAt(0) < 65 || (searchChar.charCodeAt(0) > 90 && searchChar.charCodeAt(0) < 97) || searchChar.charCodeAt(0) > 122) {
+errorMessage.innerHTML = "Error: Please enter a valid alphabetic character a-z only.";
+return;
+}
+const lowerContent = content.toLowerCase();
+const lowerChar = searchChar.toLowerCase();
+const occurrences = (lowerContent.match(new RegExp(lowerChar, 'g')) || []).length;
+
+if (occurrences > 0) {
+resultContainer.innerHTML = `The character "${searchChar}" appears ${occurrences} time(s) in the content.`;
+} else {                
+const resultMessage = `Search character "${searchChar}" not found in the content you typed.`;
+               
+const newWindow = window.open("", "NotFoundWindow", "width=300,height=100");
+newWindow.document.write("<html><body>");
+newWindow.document.write("<p>" + resultMessage + "</p>");
+newWindow.document.write("<button onclick='window.close()'>Close</button>");
+newWindow.document.write("</body></html>");
+newWindow.document.close();
+}
+});
+</script>
+</body>
+</html>

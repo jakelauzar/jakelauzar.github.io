@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="JavaScript Homework">
+    <title>Homework 6 part 3</title>
+<style>
+        body {
+        background-color: #D3D9D4;
+        margin: 20px;
+        text-align: center;
+        }
+        a.one:link {
+        color: black;
+            background: white; 
+            text-decoration: none; 
+            position: absolute;
+            top: 20px; 
+            left: 20px;
+        }
+        a.one:hover {
+            color: blue;
+            font-size: 150%;
+        }
+        input, button, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+                    }
+        button {
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            transition: background-color 0.3s;
+        }
+        button.clear-btn {
+            background-color: #f44336;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<nav>
+<a class="one" href="H6.html"> &lt;-- Back</a>
+</nav> 
+
+<div class="container">
+<h1>Phone Number Validation</h1>
+<input type="text" id="phoneNumber" placeholder="Enter your phone number (999) 999-9999" />
+<textarea id="result" rows="4" readonly></textarea>
+<button onclick="validatePhoneNumber()">Validate</button>
+<button class="clear-btn" onclick="clearForm()">Clear</button
+</div>
+
+    <script>
+(999) 999-9999
+const phoneRegex = /^\(\d{3}\) \d{3}-\d{4}$/;
+function validatePhoneNumber() {
+const phoneNumber = document.getElementById('phoneNumber').value;
+const resultElement = document.getElementById('result');
+if (phoneRegex.test(phoneNumber)) {
+resultElement.className = 'success';
+resultElement.value = "Thank you for your phone number! You should expect to be contacted by one of our agents in the future.";
+} else {
+resultElement.className = 'error';
+resultElement.value = "Error: Please enter your phone number in the correct format: (999) 999-9999.";
+}
+}
+function clearForm() {
+document.getElementById('phoneNumber').value = '';
+document.getElementById('result').value = '';
+document.getElementById('result').className = '';
+}
+</script>
+</body>
+</html>
+    

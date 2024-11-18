@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="JavaScript Homework">
+    <title>Homework 6 part 1</title>
+<style>
+        body {
+        background-color: #D3D9D4;
+        margin: 20px;
+        text-align: center;
+        }
+        a.one:link {
+        color: black;
+            background: white; 
+            text-decoration: none; 
+            position: absolute;
+            top: 20px; 
+            left: 20px;
+        }
+        a.one:hover {
+            color: blue;
+            font-size: 150%;
+        }
+	h1, h2 {
+            color: #4CAF50;
+        }
+        .form-container {
+            margin-bottom: 20px;
+        }
+        .output {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+        .error {
+            color: red;
+        }
+       
+    </style>
+<body>
+<nav>
+<a class="one" href="H6.html"> &lt;-- Back</a>
+</nav> 
+<h1>Homework 6 Part 1</h1>
+<h2> Decimal calculator </h2>
+<div class="form-container">
+<label for="numberInput">Enter a number with at least 4 decimal places:</label>
+<input type="text" id="numberInput" placeholder="e.g. 4.3264" maxlength="10">
+<button id="submitButton">Submit</button>
+<button id="clearButton">Clear</button>
+</div>
+<div id="result" class="output">
+</div>
+
+	<script>     
+const numberInput = document.getElementById("numberInput");
+const submitButton = document.getElementById("submitButton");
+const clearButton = document.getElementById("clearButton");
+const resultDiv = document.getElementById("result");
+
+function handleSubmit() {
+ const inputValue = numberInput.value.trim();            
+resultDiv.innerHTML = "";
+const number = parseFloat(inputValue);
+if (isNaN(number) || inputValue.indexOf('.') === -1 || (inputValue.split('.')[1] || '').length < 4) {
+resultDiv.innerHTML = "<p class='error'>You need to type a number with at least 4 decimals, please try again.</p>";
+return;
+}
+           
+const rounded = Math.round(number);
+const sqrt = Math.sqrt(number);
+const sqrtRounded = Math.round(sqrt);
+const tenths = number.toFixed(1);
+const hundredths = number.toFixed(2);
+const thousandths = number.toFixed(3);
+           
+resultDiv.innerHTML = `
+<p>You typed number: ${inputValue}</p>
+<p>Rounded to nearest integer: ${rounded}</p>
+<p>Square root (rounded): ${sqrtRounded}</p>
+<p>Rounded to nearest tenths: ${tenths}</p>
+<p>Rounded to nearest hundredths: ${hundredths}</p>
+<p>Rounded to nearest thousandths: ${thousandths}</p>
+;
+}        
+function handleClear() {
+numberInput.value = "";
+resultDiv.innerHTML = "";
+}       
+submitButton.addEventListener("click", handleSubmit);
+clearButton.addEventListener("click", handleClear);
+</script>
+
+</body>
+</html>
