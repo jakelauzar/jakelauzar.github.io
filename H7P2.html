@@ -1,0 +1,93 @@
+<!doctype html>  
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="JavaScript Homework">
+    <title>Homework 7 part 2</title>
+    <style>
+        body {
+            background-color: #D3D9D4;
+            margin: 20px;
+            text-align: center;
+        }
+        a.one:link {
+            color: black;
+            background: white; 
+            text-decoration: none; 
+            position: absolute;
+            top: 20px; 
+            left: 20px;
+        }
+        a.one:hover {
+            color: blue;
+            font-size: 150%;
+        }
+        form {
+            margin-top: 20px;
+        }
+        .welcome-message {
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<nav>
+<a class="one" href="H7.html"> &lt;-- Back</a>
+</nav>
+    <h1>cookie UserName Saver</h1>
+    <div id="message"></div>
+<form id="userForm" style="display: none;">
+<label for="name">Name:</label>
+<input type="text" id="name" name="name" required>
+<br><br>
+<label for="username">Username:</label>
+<input type="text" id="username" name="username" required>
+<br><br>
+<button type="submit">Submit</button>
+</form>
+<script>
+function setCookie(name, value) {
+document.cookie = `${name}=${value}; path=/;`; }
+
+function getCookie(name) {
+let nameEQ = name + "=";
+let ca = document.cookie.split(';');
+for (let i = 0; i < ca.length; i++) {
+let c = ca[i];
+while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+}
+return null;
+}
+function checkCookies() {
+const nameCookie = getCookie('name');
+const usernameCookie = getCookie('username');
+            
+if (nameCookie && usernameCookie) {
+                
+document.getElementById('message').innerHTML = `<p class="welcome-message">Welcome Back, ${nameCookie}!</p>`;
+document.getElementById('userForm').style.display = 'none'; 
+} else {
+                                document.getElementById('userForm').style.display = 'block';
+document.getElementById('message').innerHTML = '';        
+}
+}
+
+document.getElementById('userForm').addEventListener('submit', function(event) {
+event.preventDefault(); 
+            
+const name = document.getElementById('name').value;
+const username = document.getElementById('username').value;
+setCookie('name', name);
+setCookie('username', username);
+
+document.getElementById('message').innerHTML = `<p class="welcome-message">Welcome, ${name}!</p>`;
+document.getElementById('userForm').style.display = 'none'; });      
+window.onload = function() {
+checkCookies(); 
+};
+</script>
+
+</body>
+</html>

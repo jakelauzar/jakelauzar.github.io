@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="JavaScript Homework">
+    <title>Homework 7 part 1</title>
+<style>
+        body {
+        background-color: #D3D9D4;
+        margin: 20px;
+        text-align: center;
+        }
+        a.one:link {
+        color: black;
+            background: white; 
+            text-decoration: none; 
+            position: absolute;
+            top: 20px; 
+            left: 20px;
+        }
+        a.one:hover {
+            color: blue;
+            font-size: 150%;
+        }
+	label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        select, input[type="radio"], input[type="checkbox"] {
+            margin-top: 5px;
+        }       
+    </style>
+</head>
+<body>
+<nav>
+<a class="one" href="H7.html"> &lt;-- Back</a>
+</nav>
+<h1>Style Customizer</h1>
+
+<main id="styled-content">
+<p> You can change the background color, font style, and size using the form below.</p>
+<p>Keep selecting and unselecting the options to apply the styles.</p>
+<p> Each change will immediately update this area.</p>
+</main>
+
+<form id="style-form">
+<label>Background Color:</label>
+<input type="radio" name="background-color" value="lightblue" id="bg-lightblue"> Light Blue
+<input type="radio" name="background-color" value="lightgreen" id="bg-lightgreen"> Light Green
+
+<br><br>
+
+<label>Font Style:</label>
+<input type="checkbox" id="underline"> Underline
+<input type="checkbox" id="bold"> Bold
+<input type="checkbox" id="italic"> Italic
+
+<br><br>
+<label>Font Size:</label>
+<select id="font-size">
+<option value="1em">Normal</option>
+<option value="1.5em">Large</option>
+<option value="2em">Extra Large</option>
+</select>
+<br><br>
+</form>
+<script>
+document.addEventListener("input", function(event) {
+const mainElement = document.getElementById('styled-content');
+const selectedBgColor = document.querySelector('input[name="background-color"]:checked');
+if (selectedBgColor) {
+mainElement.style.backgroundColor = selectedBgColor.value;
+}
+const selectedFontSize = document.getElementById('font-size').value;
+mainElement.style.fontSize = selectedFontSize;
+mainElement.style.fontWeight = document.getElementById('bold').checked ? 'bold' : 'normal';
+mainElement.style.fontStyle = document.getElementById('italic').checked ? 'italic' : 'normal';
+mainElement.style.textDecoration = document.getElementById('underline').checked ? 'underline' : 'none';
+});
+</script>
+</body>
+</html>
+
