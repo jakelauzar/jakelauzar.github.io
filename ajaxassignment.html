@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+ <meta charset="UTF-8">
+ <meta name="description" content="JavaScript Homework">
+<title>Homework 8 AJAX </title>
+<style>
+ body {
+        background-color: #D3D9D4;
+        margin: 120px;
+        text-align: center;
+        }
+
+table,th,td {
+  border : 1px solid black;
+  border-collapse: collapse;
+}
+th,td {
+  padding: 5px;
+}
+ a.one:link {
+            color: black;
+            background: white; 
+            text-decoration: none; 
+            position: absolute;
+            top: 20px; 
+            left: 20px;
+        }
+        a.one:hover {
+            color: blue;
+            font-size: 150%;
+	}
+</style>
+<body>
+<nav>
+<a class="one" href="JavaHwMP.html"> &lt;-- Back</a>
+</nav>
+<h1> Homework 8 - AJAX Application </h1>
+
+<button type="button" onclick="loadDoc()">Get CD collection</button>
+<br><br>
+<table id="demo"></table>
+
+<script>
+function loadDoc() {
+  const xhttp = new XMLHttpRequest();
+  xhttp.onload = function() {
+    myFunction(this);
+  }
+  xhttp.open("GET", "cd_catalog.xml");
+  xhttp.send();
+}
+function myFunction(xml) {
+  const xmlDoc = xml.responseXML;
+  const x = xmlDoc.getElementsByTagName("CD");
+  let table="<tr><th>Artist</th><th>Title</th></tr>";
+  for (let i = 0; i <x.length; i++) { 
+    table += "<tr><td>" +
+    x[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue +
+    "</td><td>" +
+    x[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue +
+    "</td></tr>";
+  }
+  document.getElementById("demo").innerHTML = table;
+}
+</script>
+<h2>Explanation of AJAX </h2><br>
+<p>AJAX stands for Asynchronous JavaScript and XML, AJAX is used to load data from a XML file and display it in a HTML table. when the user clicks the Get CD collection it starts the loadDoc() function, that sends a request to the server to the cd_catalog.xml file, using the HTTP GET method. when that finishes the onload calls the myFunction() to process.  </p><br>
+<p>The myFunction() returns a xml document using xml.responceXML. It takes all of the <CD> parts from the XML file and repeats them. it takes all the values of the <CD> children and adds those values into the HTML table in rows. that table then is put into the HTML document using the demo table element.  </p><br>
+<h2>REST API </h2>
+<p>I am reporting on an API called OpenWeather API. This API lets you send in an API call to acess data such as a minute forecast for 1 hour, an hourly forecast for 48 hours, daily forecast for 8 days, and govenment weather alerts. This API lets you get responce formats in JSON, XML, and HTML. This API lets you get 1000 free calls a day and if you go over the limit its only .0015$ per call. If you are interested <a href="https://openweathermap.org/api/one-call-3">HERE</a> is a link to learn how to start using it and more on what it does. </p>
+<p> </p>
+</body>
+</html>
